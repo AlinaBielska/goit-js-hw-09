@@ -28,15 +28,18 @@ const fp = flatpickr("#datetime-picker", {
 },
 });
 
+const addLeadingZero = value => {
+  return value.toString().padStart('2', '0');
+};
+
 button.addEventListener("click", () => {
   let timerId = setInterval(() => {
   let ms = new Date(selectedDate).getTime() - new Date().getTime();
   const timerData = convertMs(ms);
-  // console.log(timerData);
-  span.second.textContent = timerData.seconds;
-  span.minute.textContent = timerData.minutes;
-  span.hour.textContent = timerData.hours;
-  span.day.textContent = timerData.days;
+  span.second.textContent = addLeadingZero(timerData.seconds);
+  span.minute.textContent = addLeadingZero(timerData.minutes);
+  span.hour.textContent = addLeadingZero(timerData.hours);
+  span.day.textContent = addLeadingZero(timerData.days);
   }, 1000);
 }
 );
@@ -58,4 +61,5 @@ function convertMs(ms) {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
-}
+};
+
