@@ -2,7 +2,6 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
 const button = document.querySelector("[data-start]");
-// const dateTimePicker = document.querySelector("#datetime-picker");
 let selectedDate = 0;
 
 const fp = flatpickr("#datetime-picker", {
@@ -23,21 +22,11 @@ const fp = flatpickr("#datetime-picker", {
 },
 });
 
-// let SD = fp.selectedDate;
-
-// próba 1
-let ms = new Date(selectedDate).getTime() - new Date().getTime();
-console.log(ms);
-button.addEventListener("click", convertMs(ms));
-
-//próba 2
-// let diffTime = () => {
-//   const dateNow = Date.now();
-//   const selectDateMs = fp.selectedDates[0].getTime();
-//   return selectDateMs - dateNow;
-// };
-
-// let ms = diffTime();
+button.addEventListener("click", () => {
+  let ms = new Date(selectedDate).getTime() - new Date().getTime();
+  const timerData = convertMs(ms)
+  console.log(timerData);
+});
   
 function convertMs(ms) {
   // Number of milliseconds per unit of time
