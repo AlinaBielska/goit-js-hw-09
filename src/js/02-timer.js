@@ -22,7 +22,6 @@ const fp = flatpickr("#datetime-picker", {
     let dateNow = new Date();
     if (selectedDates[0].getTime() < dateNow.getTime()) {
           Notiflix.Notify.failure('Please choose a date in the future');
-          // window.alert("Please choose a date in the future");
           button.setAttribute('disabled', '');
       } else {
           button.removeAttribute('disabled');
@@ -38,6 +37,10 @@ button.addEventListener("click", () => {
   let timerId = setInterval(() => {
   let ms = new Date(selectedDate).getTime() - new Date().getTime();
   const timerData = convertMs(ms);
+  if (ms <= 0) {
+      clearInterval(timerId);
+      return;
+    }
   span.second.textContent = addLeadingZero(timerData.seconds);
   span.minute.textContent = addLeadingZero(timerData.minutes);
   span.hour.textContent = addLeadingZero(timerData.hours);
